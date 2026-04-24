@@ -1,4 +1,6 @@
-﻿namespace WebApplication3.Models
+﻿using System.Text.Json.Serialization;
+
+namespace WebApplication3.Models
 {
     public class Student
     {
@@ -6,6 +8,9 @@
         public string Name { get; set; }
         public int Age { get; set; }
         public int ClassId { get; set; }
-        public Class Class { get; set; }
+        [JsonIgnore]   
+        public Class? Class { get; set; }
+        public string? ImagePath { get; set; }
+
     }
 }

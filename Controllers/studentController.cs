@@ -16,7 +16,6 @@ namespace WebApplication3.Controllers
             _service = service;
         }
         [HttpGet]
-        [HttpGet]
         public IActionResult Get()
         {
             var students = _service.GetStudents();
@@ -26,7 +25,9 @@ namespace WebApplication3.Controllers
                 Id = s.Id,
                 Name = s.Name,
                 Age = s.Age,
-                ClassName = s.Class != null ? s.Class.Name : null
+                ClassName = s.Class != null ? s.Class.Name : null,
+                ImagePath = s.ImagePath
+
             });
 
             return Ok(result);
@@ -37,9 +38,15 @@ namespace WebApplication3.Controllers
             return _service.GetStudentById(id);
         }
         [HttpPost]
-        public Student CreateStudent(Student student)
+        public IActionResult CreateStudent(Student student)
         {
-            return _service.CreateStudent(student);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); 
+            }
+
+            var result = _service.CreateStudent(student);
+            return Ok(result);
         }
         [HttpPut("{id}")]
         public IActionResult Update(int id, Student student)
