@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication3.DTOs;
 using WebApplication3.Models;
 using WebApplication3.Service;
@@ -15,6 +16,7 @@ namespace WebApplication3.Controllers
         {
             _service = service;
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Get()
         {
